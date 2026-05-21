@@ -1,0 +1,12 @@
+{
+  "part_name": "U_BRACKET_001",
+  "material": "Aluminium 5052",
+  "thickness": 2.0,
+  "inside_bend_radius": 2.0,
+  "k_factor": 0.38,
+  "part_length": 200.0,
+  "bottom_width": 100.0,
+  "left_flange_height": 40.0,
+  "right_flange_height": 40.0,
+  "bend_angle": 90
+}

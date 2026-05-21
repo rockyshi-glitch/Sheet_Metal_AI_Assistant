@@ -1,0 +1,682 @@
+[
+  {
+    "url": "http://localhost:8501/favicon.png",
+    "type": "Icon",
+    "contexts": [
+      "link[rel=\"shortcut icon\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/media/SourceSansVF-Upright.ttf.BsWL4Kly.woff2",
+    "type": "Font",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/index.64ejlaaT.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/useBasicWidgetState.CedkNjUW.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/FormClearHelper.DTcdrasw.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/index.C9BdUqTi.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/uniqueId.RI1LJdtz.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/InputInstructions.xnSDuYeQ.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/useUpdateUiValue.DeXelfRH.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/inputUtils.CptNuJwn.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/input.s6pjQ49A.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/base-input.BQft14La.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/index.CGYqqs6j.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/sprintf.D7DtBTRn.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/index.DH71Ezyj.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/FileHelper.CaIUKG91.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/UploadFileInfo.C-jY39rj.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/ProgressBar.DetlP5aY.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/static/js/Hooks.BRba_Own.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_AMS-Regular.BQhdFMY1.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_AMS-Regular.DMm9YOAa.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_AMS-Regular.DRggAlZN.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Caligraphic-Bold.Dq_IR9rO.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Caligraphic-Bold.BEiXGLvX.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Caligraphic-Bold.ATXxdsX0.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Caligraphic-Regular.Di6jR-x-.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Caligraphic-Regular.CTRA-rTL.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Caligraphic-Regular.wX97UBjC.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Fraktur-Bold.CL6g_b3V.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Fraktur-Bold.BsDP51OF.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Fraktur-Bold.BdnERNNW.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Fraktur-Regular.CTYiF6lA.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Fraktur-Regular.Dxdc4cR9.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Fraktur-Regular.CB_wures.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-Bold.Cx986IdX.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-Bold.Jm3AIy58.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-Bold.waoOVXN0.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-BoldItalic.DxDJ3AOS.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-BoldItalic.SpSLRI95.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-BoldItalic.DzxPMmG6.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-Italic.NWA7e6Wa.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-Italic.BMLOBm91.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-Italic.3WenGoN9.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-Regular.B22Nviop.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-Regular.Dr94JaBh.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Main-Regular.ypZvNtVU.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Math-BoldItalic.CZnvNsCZ.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Math-BoldItalic.iY-2wyZ7.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Math-BoldItalic.B3XSjfu4.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Math-Italic.t53AETM-.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Math-Italic.DA0__PXp.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Math-Italic.flOr_0UB.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_SansSerif-Bold.D1sUS0GD.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_SansSerif-Bold.DbIhKOiC.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_SansSerif-Bold.CFMepnvq.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_SansSerif-Italic.C3H0VqGB.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_SansSerif-Italic.DN2j7dab.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_SansSerif-Italic.YYjJ1zSn.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_SansSerif-Regular.DDBCnlJ7.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_SansSerif-Regular.CS6fqUqJ.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_SansSerif-Regular.BNo7hRIc.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Script-Regular.D3wIWfF6.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Script-Regular.D5yQViql.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Script-Regular.C5JkGWo-.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Size1-Regular.mCD8mA8B.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Size1-Regular.C195tn64.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Size1-Regular.Dbsnue_I.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Size2-Regular.Dy4dx90m.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Size2-Regular.oD1tc_U0.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Size2-Regular.B7gKUWhC.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Size3-Regular.CTq5MqoE.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Size3-Regular.DgpXs0kz.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Size4-Regular.Dl5lxZxV.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Size4-Regular.BF-4gkZK.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Size4-Regular.DWFBv043.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Typewriter-Regular.CO6r4hn1.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Typewriter-Regular.C0xS9mPB.woff",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/KaTeX_Typewriter-Regular.D3Ib7_Hf.ttf",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/SourceCodeVF-Upright.ttf.BjWn63N-.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/SourceCodeVF-Italic.ttf.Ba1oaZG1.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/SourceSansVF-Upright.ttf.BsWL4Kly.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/SourceSansVF-Italic.ttf.Bt9VkdQ3.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/SourceSerifVariable-Roman.ttf.mdpVL9bi.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/SourceSerifVariable-Italic.ttf.CVdzAtxO.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "http://localhost:8501/media/MaterialSymbols-Rounded.DeCZgS-4.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  }
+]

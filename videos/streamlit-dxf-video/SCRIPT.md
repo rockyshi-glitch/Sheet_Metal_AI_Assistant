@@ -1,0 +1,11 @@
+# Script
+
+From sheet metal parameters to a downloadable DXF.
+
+Choose the part type. Enter material, thickness, bend radius, K factor, and key dimensions.
+
+The app uses the same Python calculation and DXF generation workflow as the command line.
+
+Click generate, review the flat size, then download the DXF for CAD inspection.
+
+It is an engineering draft, ready for FreeCAD or AutoCAD review.

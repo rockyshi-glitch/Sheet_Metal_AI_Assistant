@@ -1,0 +1,24 @@
+[span] Deploy
+[h1] 钣金 DXF 参数生成
+[p] 参数输入
+[p] JSON 上传
+[p] 零件类型
+[div] U 型件
+[title] open
+[p] 零件名称
+[p] 厚度 mm
+[p] 内折弯半径 mm
+[p] K 因子
+[p] 折弯角度 deg
+[p] 长度 mm
+[p] 底宽 mm
+[p] 左翻边 mm
+[p] 右翻边 mm
+[p] 生成 DXF
+[p] JSON 参数文件
+[span] Drag and drop
+[span] file
+[span] here
+[span] Limit 200MB per file
+[span] • JSON
+[button] Browse files

@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# macOS
+.DS_Store
+
+# Local editor and environment files
+.idea/
+.vscode/
+.env
+.env.*
+
+# Streamlit local state
+.streamlit/secrets.toml
+
+# Generated video preview caches
+videos/**/.thumbnails/

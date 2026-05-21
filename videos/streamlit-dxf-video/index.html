@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #ffffff;
+        color: #31333f;
+        font-family: "Source Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        padding: 72px 80px;
+        display: flex;
+        flex-direction: column;
+        gap: 34px;
+        background: #ffffff;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      #scene-1 {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .cad-grid {
+        position: absolute;
+        inset: 0;
+        opacity: 0.45;
+        background-image:
+          linear-gradient(#f0f2f6 1px, rgba(255, 255, 255, 0) 1px),
+          linear-gradient(90deg, #f0f2f6 1px, rgba(255, 255, 255, 0) 1px);
+        background-size: 80px 80px;
+      }
+
+      .accent-wash {
+        position: absolute;
+        width: 760px;
+        height: 760px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 75, 75, 0.18), rgba(255, 75, 75, 0));
+      }
+
+      .wash-a {
+        right: -180px;
+        top: -240px;
+      }
+
+      .wash-b {
+        left: -260px;
+        bottom: -320px;
+        background: radial-gradient(circle, rgba(0, 84, 163, 0.15), rgba(0, 84, 163, 0));
+      }
+
+      .stage {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: 64px;
+        align-items: center;
+      }
+
+      .copy {
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+        align-items: flex-start;
+      }
+
+      .eyebrow {
+        font-family: "Source Code Pro", monospace;
+        font-size: 24px;
+        font-weight: 700;
+        color: #ff4b4b;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2 {
+        font-size: 92px;
+        line-height: 0.98;
+        font-weight: 900;
+        color: #31333f;
+        max-width: 760px;
+        letter-spacing: -0.02em;
+      }
+
+      h2 {
+        font-size: 76px;
+      }
+
+      .subline {
+        font-size: 34px;
+        line-height: 1.25;
+        max-width: 720px;
+        color: #31333f;
+      }
+
+      .mono {
+        font-family: "Source Code Pro", monospace;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .ui-card {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 22px;
+        overflow: hidden;
+        background: #f0f2f6;
+        border: 1px solid #d7dbe3;
+        box-shadow: 0 34px 80px rgba(49, 51, 63, 0.18);
+      }
+
+      .ui-shot {
+        width: 100%;
+        height: 100%;
+        background-image: url("capture/screenshots/scroll-000.png");
+        background-size: cover;
+        background-position: center top;
+      }
+
+      .pipeline {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .pipe-chip,
+      .param-chip,
+      .layer-chip {
+        border: 1px solid #d7dbe3;
+        background: #ffffff;
+        border-radius: 999px;
+        padding: 12px 18px;
+        font-family: "Source Code Pro", monospace;
+        font-size: 22px;
+        font-weight: 700;
+        color: #31333f;
+        box-shadow: 0 14px 36px rgba(49, 51, 63, 0.08);
+      }
+
+      .pipe-arrow {
+        color: #b82020;
+        font-size: 28px;
+        font-weight: 900;
+      }
+
+      .form-focus {
+        position: absolute;
+        border: 4px solid #ff4b4b;
+        border-radius: 16px;
+        background: rgba(255, 75, 75, 0.08);
+        box-shadow: 0 0 0 8px rgba(255, 75, 75, 0.09);
+      }
+
+      .focus-type {
+        left: 2.2%;
+        top: 25%;
+        width: 95%;
+        height: 5%;
+      }
+
+      .focus-form {
+        left: 2.2%;
+        top: 30.5%;
+        width: 95%;
+        height: 38%;
+      }
+
+      .params {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .param-chip {
+        border-radius: 12px;
+        padding: 18px 22px;
+        font-size: 24px;
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .param-chip strong {
+        color: #0054a3;
+      }
+
+      .flat-pattern {
+        position: relative;
+        width: 560px;
+        height: 360px;
+        border: 5px solid #31333f;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 24px 60px rgba(49, 51, 63, 0.12);
+      }
+
+      .bend-line {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-image: repeating-linear-gradient(
+          to bottom,
+          #0054a3 0,
+          #0054a3 24px,
+          rgba(0, 84, 163, 0) 24px,
+          rgba(0, 84, 163, 0) 38px
+        );
+      }
+
+      .bend-left {
+        left: 125px;
+      }
+
+      .bend-right {
+        right: 125px;
+      }
+
+      .pattern-label {
+        position: absolute;
+        right: 20px;
+        bottom: 18px;
+        font-size: 22px;
+        font-weight: 800;
+        color: #0054a3;
+      }
+
+      .engine-stack {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        max-width: 760px;
+      }
+
+      .engine-card {
+        background: #ffffff;
+        border: 1px solid #d7dbe3;
+        border-radius: 18px;
+        padding: 30px 34px;
+        box-shadow: 0 24px 56px rgba(49, 51, 63, 0.12);
+      }
+
+      .engine-card .title {
+        font-size: 34px;
+        font-weight: 900;
+        color: #31333f;
+      }
+
+      .engine-card .desc {
+        margin-top: 8px;
+        font-size: 24px;
+        color: #5c6070;
+      }
+
+      .connector-svg {
+        width: 100%;
+        height: 120px;
+      }
+
+      .draw-path {
+        stroke: #ff4b4b;
+        stroke-width: 6;
+        stroke-linecap: round;
+        fill: none;
+        stroke-dasharray: 920;
+        stroke-dashoffset: 920;
+      }
+
+      .layers {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      .layer-chip {
+        color: #0054a3;
+        border-color: rgba(0, 84, 163, 0.28);
+      }
+
+      .metric-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        width: 100%;
+      }
+
+      .metric {
+        background: #f0f2f6;
+        border-radius: 16px;
+        padding: 28px 30px;
+        border: 1px solid #d7dbe3;
+      }
+
+      .metric .label {
+        font-size: 22px;
+        color: #5c6070;
+      }
+
+      .metric .value {
+        margin-top: 10px;
+        font-size: 42px;
+        font-weight: 900;
+        color: #31333f;
+        font-family: "Source Code Pro", monospace;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .download-file {
+        margin-top: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        padding: 28px 34px;
+        background: #31333f;
+        color: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 24px 60px rgba(49, 51, 63, 0.2);
+      }
+
+      .download-file .name {
+        font-size: 30px;
+        font-family: "Source Code Pro", monospace;
+        font-weight: 800;
+      }
+
+      .download-file .badge {
+        padding: 12px 20px;
+        border-radius: 999px;
+        background: #ff4b4b;
+        color: #ffffff;
+        font-size: 22px;
+        font-weight: 900;
+      }
+
+      .final-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 70px;
+        align-items: center;
+        height: 100%;
+      }
+
+      .review-card {
+        padding: 44px;
+        border-radius: 22px;
+        border: 1px solid #d7dbe3;
+        background: #ffffff;
+        box-shadow: 0 28px 74px rgba(49, 51, 63, 0.14);
+      }
+
+      .review-card h2 {
+        font-size: 70px;
+      }
+
+      .review-card p {
+        margin-top: 24px;
+        font-size: 34px;
+        line-height: 1.28;
+      }
+
+      .cta {
+        margin-top: 34px;
+        display: inline-flex;
+        padding: 18px 28px;
+        border-radius: 999px;
+        background: #f0f2f6;
+        color: #31333f;
+        border: 3px solid #ff4b4b;
+        font-size: 28px;
+        font-weight: 900;
+      }
+
+      .caption-bar {
+        position: absolute;
+        left: 80px;
+        right: 80px;
+        bottom: 42px;
+        z-index: 7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 86px;
+        pointer-events: none;
+      }
+
+      .caption {
+        position: absolute;
+        max-width: 1160px;
+        padding: 18px 28px;
+        border-radius: 999px;
+        background: #f0f2f6;
+        color: #31333f;
+        border: 2px solid #d7dbe3;
+        font-size: 28px;
+        font-weight: 800;
+        text-align: center;
+        box-shadow: 0 16px 44px rgba(49, 51, 63, 0.2);
+      }
+
+      .red-line {
+        position: absolute;
+        height: 6px;
+        left: 80px;
+        right: 80px;
+        top: 226px;
+        background: #ff4b4b;
+        border-radius: 999px;
+      }
+
+      .fade-white {
+        position: absolute;
+        inset: 0;
+        z-index: 20;
+        background: #ffffff;
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="24"
+      data-width="1920"
+      data-height="1080"
+    >
+      <section class="scene" id="scene-1">
+        <div class="cad-grid"></div>
+        <div class="accent-wash wash-a" data-layout-allow-overflow></div>
+        <div class="accent-wash wash-b" data-layout-allow-overflow></div>
+        <div class="stage">
+          <div class="copy">
+            <div class="eyebrow">Sheet Metal DXF MVP</div>
+            <h1>JSON 参数到 DXF 下载</h1>
+            <div class="subline">A local Streamlit interface for fast sheet metal flat-pattern drafts.</div>
+            <div class="pipeline">
+              <span class="pipe-chip">JSON</span>
+              <span class="pipe-arrow">→</span>
+              <span class="pipe-chip">Python</span>
+              <span class="pipe-arrow">→</span>
+              <span class="pipe-chip">ezdxf</span>
+              <span class="pipe-arrow">→</span>
+              <span class="pipe-chip">DXF</span>
+            </div>
+          </div>
+          <div class="ui-card" id="hero-card">
+            <div class="ui-shot"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-2">
+        <div class="cad-grid"></div>
+        <div class="accent-wash wash-a" data-layout-allow-overflow></div>
+        <div class="stage">
+          <div class="ui-card" id="form-card">
+            <div class="ui-shot"></div>
+            <div class="form-focus focus-type"></div>
+            <div class="form-focus focus-form"></div>
+          </div>
+          <div class="copy">
+            <div class="eyebrow">Parameter Input</div>
+            <h2>选择零件类型，填入折弯参数</h2>
+            <div class="params">
+              <div class="param-chip"><span>Material</span><strong>Al 5052</strong></div>
+              <div class="param-chip"><span>Thickness</span><strong>2.00 mm</strong></div>
+              <div class="param-chip"><span>Bend Radius</span><strong>2.00 mm</strong></div>
+              <div class="param-chip"><span>K Factor</span><strong>0.38</strong></div>
+              <div class="param-chip"><span>Bottom Width</span><strong>100 mm</strong></div>
+              <div class="param-chip"><span>Flanges</span><strong>40 / 40</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-3">
+        <div class="cad-grid"></div>
+        <div class="accent-wash wash-b" data-layout-allow-overflow></div>
+        <div class="stage">
+          <div class="copy">
+            <div class="eyebrow">Shared Generation Path</div>
+            <h2>Web 和命令行共用同一条生成逻辑</h2>
+            <div class="subline">Validation, bend allowance calculation, and DXF layers stay in one tested workflow.</div>
+          </div>
+          <div class="engine-stack">
+            <div class="engine-card">
+              <div class="title mono">Streamlit form</div>
+              <div class="desc">Manual input or uploaded JSON</div>
+            </div>
+            <svg class="connector-svg" viewBox="0 0 760 120">
+              <path class="draw-path" d="M40 20 C210 105 510 12 720 92"></path>
+            </svg>
+            <div class="engine-card">
+              <div class="title mono">generation.py</div>
+              <div class="desc">Validates parameters and calls the DXF generator</div>
+            </div>
+            <div class="engine-card">
+              <div class="title mono">DXF layers</div>
+              <div class="layers">
+                <span class="layer-chip">CUT</span>
+                <span class="layer-chip">BEND</span>
+                <span class="layer-chip">TEXT</span>
+                <span class="layer-chip">HOLE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-4">
+        <div class="cad-grid"></div>
+        <div class="red-line"></div>
+        <div class="stage">
+          <div class="copy">
+            <div class="eyebrow">Generate And Download</div>
+            <h2>生成后先看展开尺寸，再下载 DXF</h2>
+            <div class="metric-row">
+              <div class="metric">
+                <div class="label">Flat width</div>
+                <div class="value">188.67</div>
+              </div>
+              <div class="metric">
+                <div class="label">Flat length</div>
+                <div class="value">200.00</div>
+              </div>
+              <div class="metric">
+                <div class="label">BA</div>
+                <div class="value">4.335</div>
+              </div>
+            </div>
+            <div class="download-file">
+              <div class="name">U_BRACKET_STREAMLIT.dxf</div>
+              <div class="badge">DOWNLOAD</div>
+            </div>
+          </div>
+          <div class="ui-card" id="result-card">
+            <div class="ui-shot"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-5">
+        <div class="cad-grid"></div>
+        <div class="accent-wash wash-a" data-layout-allow-overflow></div>
+        <div class="final-layout">
+          <div class="flat-pattern" id="flat-pattern">
+            <div class="bend-line bend-left"></div>
+            <div class="bend-line bend-right"></div>
+            <div class="pattern-label mono">CUT / BEND / TEXT</div>
+          </div>
+          <div class="review-card">
+            <div class="eyebrow">Engineer Review</div>
+            <h2>这是可审核初稿，不是生产批准图</h2>
+            <p>Open the DXF in FreeCAD or AutoCAD. Check layers, bend direction, dimensions, material, and factory parameters before production.</p>
+            <div class="cta">Open in FreeCAD or AutoCAD</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="caption-bar">
+        <div class="caption" id="caption-1">From sheet metal parameters to a downloadable DXF.</div>
+        <div class="caption" id="caption-2">Choose the part type, material, thickness, bend radius, K factor, and key dimensions.</div>
+        <div class="caption" id="caption-3">The Web UI uses the same tested Python generation path as the command line.</div>
+        <div class="caption" id="caption-4">Click generate, review the flat size, then download the DXF for CAD inspection.</div>
+        <div class="caption" id="caption-5">Draft first. Engineer review before production.</div>
+      </div>
+      <div class="fade-white" id="fade-white"></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const scenes = ["#scene-1", "#scene-2", "#scene-3", "#scene-4", "#scene-5"];
+      const captionEls = ["#caption-1", "#caption-2", "#caption-3", "#caption-4", "#caption-5"];
+
+      tl.set(scenes, { autoAlpha: 0 });
+      tl.set("#scene-1", { autoAlpha: 1 });
+      tl.set(captionEls, { autoAlpha: 0 });
+      tl.set("#caption-1", { autoAlpha: 1 });
+
+      function showScene(selector, at) {
+        tl.to(scenes, { autoAlpha: 0, duration: 0.45, ease: "power2.inOut" }, at);
+        tl.to(selector, { autoAlpha: 1, duration: 0.55, ease: "power2.inOut" }, at + 0.08);
+      }
+
+      function showCaption(selector, at) {
+        tl.to(captionEls, { autoAlpha: 0, duration: 0.18, ease: "power1.out" }, at);
+        tl.fromTo(selector, { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.36, ease: "power2.out" }, at + 0.05);
+      }
+
+      showCaption("#caption-1", 0);
+      showCaption("#caption-2", 4);
+      showCaption("#caption-3", 9);
+      showCaption("#caption-4", 14);
+      showCaption("#caption-5", 19);
+
+      tl.fromTo("#scene-1 .eyebrow", { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.2);
+      tl.fromTo("#scene-1 h1", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "expo.out" }, 0.45);
+      tl.fromTo("#scene-1 .subline", { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power2.out" }, 0.8);
+      tl.fromTo("#hero-card", { x: 120, y: 30, opacity: 0, scale: 0.94 }, { x: 0, y: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" }, 0.55);
+      tl.fromTo("#scene-1 .pipe-chip", { y: 28, opacity: 0, scale: 0.92 }, { y: 0, opacity: 1, scale: 1, duration: 0.45, stagger: 0.08, ease: "back.out(1.6)" }, 1.1);
+      tl.fromTo("#scene-1 .pipe-arrow", { opacity: 0 }, { opacity: 1, duration: 0.25, stagger: 0.08, ease: "power1.out" }, 1.25);
+      tl.to("#scene-1 .accent-wash", { scale: 1.06, duration: 3.7, ease: "sine.inOut" }, 0.2);
+
+      showScene("#scene-2", 4.0);
+      tl.fromTo("#form-card", { x: -110, opacity: 0, scale: 0.96 }, { x: 0, opacity: 1, scale: 1, duration: 0.7, ease: "power3.out" }, 4.25);
+      tl.fromTo("#scene-2 h2", { y: 44, opacity: 0 }, { y: 0, opacity: 1, duration: 0.62, ease: "expo.out" }, 4.55);
+      tl.fromTo("#scene-2 .param-chip", { x: 46, opacity: 0 }, { x: 0, opacity: 1, duration: 0.44, stagger: 0.08, ease: "power2.out" }, 5.05);
+      tl.fromTo(".focus-type", { opacity: 0, scale: 0.98 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" }, 5.0);
+      tl.fromTo(".focus-form", { opacity: 0, scale: 0.98 }, { opacity: 1, scale: 1, duration: 0.55, ease: "power2.out" }, 5.5);
+      tl.to("#scene-2 .form-focus", { opacity: 0.42, duration: 0.8, yoyo: true, repeat: 3, ease: "sine.inOut" }, 6.0);
+
+      showScene("#scene-3", 9.0);
+      tl.fromTo("#scene-3 h2", { y: 46, opacity: 0 }, { y: 0, opacity: 1, duration: 0.62, ease: "expo.out" }, 9.35);
+      tl.fromTo("#scene-3 .subline", { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.48, ease: "power2.out" }, 9.78);
+      tl.fromTo("#scene-3 .engine-card", { y: 46, opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, stagger: 0.18, ease: "power3.out" }, 9.75);
+      tl.to(".draw-path", { strokeDashoffset: 0, duration: 1.25, ease: "power2.out" }, 10.4);
+      tl.fromTo("#scene-3 .layer-chip", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.32, stagger: 0.08, ease: "back.out(1.5)" }, 11.2);
+
+      showScene("#scene-4", 14.0);
+      tl.fromTo("#scene-4 .red-line", { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.68, ease: "power3.out" }, 14.12);
+      tl.fromTo("#scene-4 h2", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.64, ease: "expo.out" }, 14.35);
+      tl.fromTo("#scene-4 .metric", { y: 48, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.48, stagger: 0.1, ease: "power2.out" }, 14.9);
+      tl.fromTo(".download-file", { y: 42, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: "back.out(1.5)" }, 15.65);
+      tl.fromTo("#result-card", { x: 100, opacity: 0, scale: 0.96 }, { x: 0, opacity: 1, scale: 1, duration: 0.72, ease: "power3.out" }, 14.6);
+      tl.to(".download-file .badge", { scale: 1.08, duration: 0.28, yoyo: true, repeat: 3, ease: "sine.inOut" }, 16.4);
+
+      showScene("#scene-5", 19.0);
+      tl.fromTo("#flat-pattern", { x: -80, opacity: 0, scale: 0.94 }, { x: 0, opacity: 1, scale: 1, duration: 0.72, ease: "power3.out" }, 19.3);
+      tl.fromTo("#scene-5 .bend-line", { opacity: 0 }, { opacity: 1, duration: 0.5, stagger: 0.18, ease: "power2.out" }, 19.85);
+      tl.fromTo(".review-card", { x: 92, opacity: 0, scale: 0.96 }, { x: 0, opacity: 1, scale: 1, duration: 0.78, ease: "power3.out" }, 19.45);
+      tl.fromTo(".cta", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, ease: "back.out(1.6)" }, 20.42);
+      tl.to("#flat-pattern", { y: -8, duration: 1.6, yoyo: true, repeat: 2, ease: "sine.inOut" }, 20.4);
+      tl.to("#fade-white", { opacity: 1, duration: 0.8, ease: "sine.inOut" }, 23.2);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

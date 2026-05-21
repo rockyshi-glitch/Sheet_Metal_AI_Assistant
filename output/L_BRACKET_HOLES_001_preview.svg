@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 560" role="img" aria-label="L_BRACKET_HOLES_001 | 144.34 x 200.00 mm">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#374151" />
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #f8fafc; }
+    .grid { stroke: #e5e7eb; stroke-width: 1; }
+    .cut { fill: none; stroke: #dc2626; stroke-width: 3; stroke-linejoin: round; }
+    .bend { stroke: #2563eb; stroke-width: 2; stroke-dasharray: 10 8; }
+    .hole { fill: none; stroke: #16a34a; stroke-width: 3; }
+    .invalid-hole { fill: #ef4444; fill-opacity: 0.22; stroke: #dc2626; stroke-width: 3; stroke-dasharray: 7 5; }
+    .dimension, .extension { stroke: #374151; stroke-width: 1.4; }
+    .dimension-arrow { fill: #374151; stroke: none; }
+    .fold-arrow { stroke: #7c3aed; stroke-width: 2; }
+    .label, .bend-label, .hole-label { fill: #111827; font-family: Arial, sans-serif; font-size: 16px; font-weight: 700; }
+    .invalid-hole-label { fill: #b91c1c; font-family: Arial, sans-serif; font-size: 16px; font-weight: 700; }
+    .meta { fill: #4b5563; font-family: Arial, sans-serif; font-size: 13px; }
+    .dim-label, .bend-note { fill: #374151; font-family: Arial, sans-serif; font-size: 12px; font-weight: 700; }
+    .table-title { fill: #111827; font-family: Arial, sans-serif; font-size: 13px; font-weight: 700; }
+    .table-text { fill: #4b5563; font-family: Arial, sans-serif; font-size: 12px; font-family: monospace; }
+    .legend { fill: #111827; font-family: Arial, sans-serif; font-size: 13px; font-weight: 700; }
+    .legend-sample { stroke-width: 3; }
+  </style>
+  <rect class="bg" x="0" y="0" width="780" height="560" rx="14" />
+  <rect class="draw-safe-zone" x="78.00" y="132.00" width="624.00" height="258.00" fill="none" />
+  <line class="grid" x1="296.90" y1="132.00" x2="483.10" y2="132.00" />
+  <line class="grid" x1="296.90" y1="390.00" x2="483.10" y2="390.00" />
+  <polyline class="cut" points="296.90,390.00 483.10,390.00 483.10,132.00 296.90,132.00 296.90,390.00" /><line class="bend" x1="351.30" y1="132.00" x2="351.30" y2="390.00" /><text class="bend-label" x="358.30" y="154.00">B1</text><line class="fold-arrow" x1="335.30" y1="118.00" x2="367.30" y2="118.00" marker-end="url(#arrow)" /><text class="bend-note" x="351.30" y="110.00" text-anchor="middle">B1 BEND UP VERIFY</text><circle class="hole" cx="418.60" cy="312.60" r="7.74" /><text class="hole-label" x="418.60" y="295.86" text-anchor="middle">H1</text><circle class="hole" cx="418.60" cy="209.40" r="7.74" /><text class="hole-label" x="418.60" y="192.66" text-anchor="middle">H2</text><circle class="hole" cx="320.12" cy="261.00" r="5.16" /><text class="hole-label" x="320.12" y="246.84" text-anchor="middle">H3</text>
+  <text class="label" x="24.00" y="30.00">L_BRACKET_HOLES_001</text><text class="meta" x="24.00" y="52.00">MATERIAL: Aluminium 5052</text><text class="meta" x="24.00" y="68.00">THICKNESS: 2.00 mm</text><text class="meta" x="24.00" y="84.00">FLAT SIZE: 144.34 x 200.00 mm</text><text class="meta" x="24.00" y="100.00">BEND ALLOWANCE: 4.335 mm</text><text class="meta" x="24.00" y="116.00">HOLES: 3</text><line class="cut legend-sample" x1="24.00" y1="532.00" x2="52.00" y2="532.00" /><text class="legend" x="60.00" y="536.00">CUT</text><line class="bend legend-sample" x1="118.00" y1="532.00" x2="146.00" y2="532.00" /><text class="legend" x="154.00" y="536.00">BEND</text><circle class="hole legend-sample" cx="238.00" cy="532.00" r="7.00" /><text class="legend" x="252.00" y="536.00">HOLE</text><line class="extension" x1="296.90" y1="390.00" x2="296.90" y2="431.00" /><line class="extension" x1="483.10" y1="390.00" x2="483.10" y2="431.00" /><line class="dimension" x1="296.90" y1="424.00" x2="483.10" y2="424.00" /><polygon class="dimension-arrow" points="296.90,424.00 306.90,428.50 306.90,419.50" /><polygon class="dimension-arrow" points="483.10,424.00 473.10,419.50 473.10,428.50" /><text class="dim-label" x="390.00" y="415.00" text-anchor="middle">WIDTH 144.34 mm</text><line class="extension" x1="296.90" y1="132.00" x2="253.90" y2="132.00" /><line class="extension" x1="296.90" y1="390.00" x2="253.90" y2="390.00" /><line class="dimension" x1="260.90" y1="132.00" x2="260.90" y2="390.00" /><polygon class="dimension-arrow" points="260.90,132.00 256.40,142.00 265.40,142.00" /><polygon class="dimension-arrow" points="260.90,390.00 265.40,380.00 256.40,380.00" /><text class="dim-label" x="249.90" y="261.00" text-anchor="middle" transform="rotate(-90 249.90 261.00)">LENGTH 200.00 mm</text><text class="table-title" x="520.00" y="30.00">HOLE TABLE</text><text class="table-text" x="520.00" y="48.00">ID    X      Y      DIA/SIZE</text><text class="table-text" x="520.00" y="64.00">H1  BASE   94.3   60.0   12.0</text><text class="table-text" x="520.00" y="80.00">H2  BASE   94.3  140.0   12.0</text><text class="table-text" x="520.00" y="96.00">H3  FLANGE   18.0  100.0    8.0</text>
+</svg>

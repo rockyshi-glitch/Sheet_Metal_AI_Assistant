@@ -1,0 +1,30 @@
+{
+  "part_type": "flat_plate",
+  "part_name": "FLAT_PLATE_001",
+  "material": "Aluminium 5052",
+  "thickness": 2.0,
+  "plate_width": 160.0,
+  "plate_length": 100.0,
+  "holes": [
+    {
+      "x": 30.0,
+      "y": 30.0,
+      "diameter": 10.0
+    },
+    {
+      "x": 130.0,
+      "y": 30.0,
+      "diameter": 10.0
+    },
+    {
+      "x": 30.0,
+      "y": 70.0,
+      "diameter": 10.0
+    },
+    {
+      "x": 130.0,
+      "y": 70.0,
+      "diameter": 10.0
+    }
+  ]
+}

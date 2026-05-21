@@ -1,0 +1,18 @@
+{
+  "part_type": "flat_plate",
+  "part_name": "FLAT_PLATE_FEATURES_001",
+  "material": "Aluminium 5052",
+  "thickness": 2.0,
+  "plate_width": 180.0,
+  "plate_length": 110.0,
+  "holes": [
+    {"x": 35.0, "y": 35.0, "diameter": 10.0},
+    {"type": "slot", "x": 130.0, "y": 72.0, "length": 34.0, "width": 10.0, "orientation": "horizontal"}
+  ],
+  "features": [
+    {"type": "corner_chamfer", "corner": "lower_left", "distance": 12.0},
+    {"type": "corner_radius", "corner": "lower_right", "radius": 10.0},
+    {"type": "corner_chamfer", "corner": "upper_right", "distance": 15.0},
+    {"type": "edge_notch", "side": "bottom", "offset": 70.0, "width": 28.0, "depth": 10.0}
+  ]
+}
