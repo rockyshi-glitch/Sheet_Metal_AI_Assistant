@@ -471,6 +471,23 @@ def _hole_fit_range(data: dict[str, Any], hole_index: int, axis: str) -> tuple[f
 
 
 def _format_validation_error(message: str, data: dict[str, Any] | None = None) -> str:
+    bend_zone_match = re.fullmatch(
+        r"holes\[(\d+)\] must keep at least ([0-9.]+) mm from the bend influence zone near the "
+        r"(left|right) face edge \(bend-line clearance: (-?[0-9.]+) mm, face-edge clearance: (-?[0-9.]+) mm\)\.",
+        message,
+    )
+    if bend_zone_match:
+        hole_index = int(bend_zone_match.group(1))
+        required_clearance = float(bend_zone_match.group(2))
+        side_label = "左侧" if bend_zone_match.group(3) == "left" else "右侧"
+        bend_line_clearance = float(bend_zone_match.group(4))
+        face_edge_clearance = float(bend_zone_match.group(5))
+        return (
+            f"第 {hole_index + 1} 个孔/槽孔距离{side_label}折弯影响区太近。"
+            f"要求至少 {required_clearance:.2f} mm；当前孔边到折弯线约 {bend_line_clearance:.2f} mm，"
+            f"到所属面边界约 {face_edge_clearance:.2f} mm。"
+        )
+
     hole_match = re.fullmatch(r"holes\[(\d+)\]\.([xy]) must keep the hole inside the plate\.", message)
     if hole_match:
         hole_index = int(hole_match.group(1))

@@ -102,6 +102,18 @@ class StreamlitAppHelperTest(unittest.TestCase):
         self.assertIn("当前值为 300.00 mm", message)
         self.assertIn("建议范围约为 17.00 - 163.00 mm", message)
 
+    def test_formats_bent_plate_bend_influence_error_for_streamlit_users(self) -> None:
+        message = _format_validation_error(
+            "holes[0] must keep at least 8.00 mm from the bend influence zone near the left face edge "
+            "(bend-line clearance: 8.17 mm, face-edge clearance: 6.00 mm)."
+        )
+
+        self.assertIn("第 1 个孔/槽孔", message)
+        self.assertIn("左侧折弯影响区太近", message)
+        self.assertIn("要求至少 8.00 mm", message)
+        self.assertIn("折弯线约 8.17 mm", message)
+        self.assertIn("所属面边界约 6.00 mm", message)
+
     def test_formats_hole_intersecting_feature_cutout_error(self) -> None:
         data = {
             "part_type": "flat_plate",

@@ -158,7 +158,7 @@ class SheetMetalMathTest(unittest.TestCase):
             holes=[{"type": "slot", "face": "bottom", "x": 18.0, "y": 100.0, "length": 24.0, "width": 8.0}],
         )
 
-        with self.assertRaisesRegex(ValueError, "bend-adjacent face edges"):
+        with self.assertRaisesRegex(ValueError, "bend influence zone"):
             UBracketWithHolesParams.from_dict(data)
 
     def test_rejects_u_bracket_hole_too_close_to_bend_adjacent_edge(self) -> None:
@@ -167,7 +167,7 @@ class SheetMetalMathTest(unittest.TestCase):
             holes=[{"face": "bottom", "x": 10.0, "y": 60.0, "diameter": 8.0}],
         )
 
-        with self.assertRaisesRegex(ValueError, "bend-adjacent face edges"):
+        with self.assertRaisesRegex(ValueError, r"bend-line clearance: 8\.17 mm, face-edge clearance: 6\.00 mm"):
             UBracketWithHolesParams.from_dict(data)
 
     def test_rejects_u_bracket_hole_outside_own_face(self) -> None:
@@ -214,7 +214,7 @@ class SheetMetalMathTest(unittest.TestCase):
             holes=[{"face": "base", "x": 10.0, "y": 60.0, "diameter": 8.0}],
         )
 
-        with self.assertRaisesRegex(ValueError, "bend-adjacent face edges"):
+        with self.assertRaisesRegex(ValueError, r"bend-line clearance: 8\.17 mm, face-edge clearance: 6\.00 mm"):
             LBracketWithHolesParams.from_dict(data)
 
     def test_rejects_l_bracket_hole_outside_own_face(self) -> None:

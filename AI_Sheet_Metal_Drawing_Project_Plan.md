@@ -815,6 +815,45 @@ DXF 可以在 AutoCAD 或 FreeCAD 等 CAD 软件中打开并继续编辑
 
 ## 当前进度
 
+### 2026-05-22 孔到折弯线与折弯影响区校验更新
+
+已完成：
+
+- 已按“下一步行动清单”继续推进可实现的代码项；人工 CAD 检查项仍保留给用户后续完成。
+- 已增强带孔 U/L 折弯件的孔到折弯校验逻辑：
+  - 内部同时计算孔边到所属面边界的距离。
+  - 内部同时计算孔边到实际折弯线的距离。
+  - `min_hole_to_bend_distance` 继续作为 MVP 简化规则，用于校验孔边到折弯影响区边界的最小距离。
+- 已更新错误信息，在校验失败时显示折弯线距离和所属面边界距离，便于工程师判断风险来源。
+- 已为 Streamlit 错误格式化补充中文提示，避免把英文技术错误直接展示给用户。
+- 已补充/更新测试，覆盖圆孔、长圆槽孔和 Streamlit 中文错误提示。
+- 已更新 README，说明当前校验仍是 MVP 简化规则，不是生产级折弯变形判断。
+
+本次修改的文件：
+
+- `src/sheet_metal_math.py`
+- `src/streamlit_app.py`
+- `tests/test_sheet_metal_math.py`
+- `tests/test_streamlit_app.py`
+- `README.md`
+- `AI_Sheet_Metal_Drawing_Project_Plan.md`
+
+测试结果：
+
+- 已运行 `PYTHONPYCACHEPREFIX=/private/tmp/sheet_metal_ai_pycache .venv/bin/python -m compileall src tests`，编译检查通过。
+- 已运行 `.venv/bin/python -m unittest tests.test_sheet_metal_math tests.test_streamlit_app`，共 `35` 个相关测试通过。
+- 已运行 `.venv/bin/python -m unittest discover tests`，共 `71` 个测试通过。
+- 已运行 `.venv/bin/python src/main.py --input examples/u_bracket_with_holes_sample.json --output-dir output --preview-svg`，成功生成 `output/U_BRACKET_HOLES_001.dxf` 和 `output/U_BRACKET_HOLES_001_preview.svg`。
+- 已运行 `.venv/bin/python src/main.py --input examples/l_bracket_with_holes_sample.json --output-dir output --preview-svg`，成功生成 `output/L_BRACKET_HOLES_001.dxf` 和 `output/L_BRACKET_HOLES_001_preview.svg`。
+
+存在问题：
+
+- 折弯影响区仍按 MVP 简化模型处理，尚未接入材料、模具、下模开口、回弹和工厂经验表。
+- SVG 检查图和 DXF 文字尚未显示孔到折弯线/影响区的风险提示。
+- Streamlit 手动输入页仍未提供带孔 U/L 型件表单。
+
+---
+
 ### 2026-05-21 GitHub 版本控制与云端备份更新
 
 已完成：
@@ -2501,18 +2540,17 @@ DXF 可以在 AutoCAD 或 FreeCAD 等 CAD 软件中打开并继续编辑
 优先级从高到低：
 
 1. 请用户在 AutoCAD / FreeCAD 中打开 `output/L_BRACKET_HOLES_001.dxf` 和 `output/U_BRACKET_HOLES_001.dxf`，人工检查带孔折弯件的 `CUT / BEND / HOLE / TEXT` 图层、孔位、折弯线和文字说明。
-2. 继续增强孔到折弯线校验，区分孔边到折弯线、孔边到折弯影响区、孔边到面边界等不同规则。
-3. 在 SVG 检查图和 DXF 文字中继续强化孔所属面、展开坐标和审核提示。
-4. 为 Streamlit 手动输入页增加带孔 U/L 型件表单，允许直接编辑底面孔、翻边孔和最小孔到折弯距离。
-5. 继续扩展非规则外轮廓能力，下一步支持折边避让、折弯释放槽等高频特征。
-6. 中期探索 `cut_outline` 多段线输入，让用户或后续 PDF / 三维图解析模块可以提供自由外轮廓点列，不再被固定模板限制。
-7. 建立箱体 / 电缆盒产品 JSON 草案，表达底板、侧板、盖板、翻边、孔、焊接边和装配关系。
-8. 设计制造约束输入结构，包括板材规格、最大切割尺寸、最大折弯长度、最小孔到折弯线距离、焊接成本和材料利用率权重。
-9. 后续实现候选拆分方案生成与评分，先输出可解释推荐方案和备选方案，不追求绝对最优。
-10. 请用户打开或刷新 `http://localhost:8506`，确认 Streamlit 页面可访问，并继续人工检查角部圆角、长圆槽孔和诊断预览。
-11. 每次修改或确认 Streamlit 本地端口时，同步更新本计划书开头的“当前本地服务地址”区块，并在当前进度中记录。
-12. 继续增强 SVG 检查图，加入孔距尺寸链、审核签名区和更清晰的折弯方向交互确认。
-13. 后续探索 PDF / 三维工程图文本与视觉辅助提取，生成结构化产品 JSON 草稿，但不要影响当前 JSON 到 DXF 的稳定闭环。
+2. 在 SVG 检查图和 DXF 文字中继续强化孔所属面、展开坐标和孔到折弯风险提示。
+3. 为 Streamlit 手动输入页增加带孔 U/L 型件表单，允许直接编辑底面孔、翻边孔和最小孔到折弯距离。
+4. 继续扩展非规则外轮廓能力，下一步支持折边避让、折弯释放槽等高频特征。
+5. 中期探索 `cut_outline` 多段线输入，让用户或后续 PDF / 三维图解析模块可以提供自由外轮廓点列，不再被固定模板限制。
+6. 建立箱体 / 电缆盒产品 JSON 草案，表达底板、侧板、盖板、翻边、孔、焊接边和装配关系。
+7. 设计制造约束输入结构，包括板材规格、最大切割尺寸、最大折弯长度、最小孔到折弯线距离、焊接成本和材料利用率权重。
+8. 后续实现候选拆分方案生成与评分，先输出可解释推荐方案和备选方案，不追求绝对最优。
+9. 请用户打开或刷新 `http://localhost:8506`，确认 Streamlit 页面可访问，并继续人工检查角部圆角、长圆槽孔和诊断预览。
+10. 每次修改或确认 Streamlit 本地端口时，同步更新本计划书开头的“当前本地服务地址”区块，并在当前进度中记录。
+11. 继续增强 SVG 检查图，加入孔距尺寸链、审核签名区和更清晰的折弯方向交互确认。
+12. 后续探索 PDF / 三维工程图文本与视觉辅助提取，生成结构化产品 JSON 草稿，但不要影响当前 JSON 到 DXF 的稳定闭环。
 
 ---
 
@@ -2523,6 +2561,7 @@ DXF 可以在 AutoCAD 或 FreeCAD 等 CAD 软件中打开并继续编辑
 - SVG 检查图的尺寸箭头已改为线内实体箭头，孔编号也已改为基于孔/槽孔外接框避让；后续新增尺寸链、孔距标注或审核签名区时，应继续保持箭头和文字不越界、不遮挡关键几何。
 - 平板件已开始支持参数化 `features` 和长圆槽孔，目前可表达角部倒角、角部圆角、边缘矩形缺口、圆孔和水平/竖直长圆槽孔；这些能力已接入 Streamlit 基础表单，长圆槽孔示例已由用户人工审核通过，新加入的角部圆角仍需人工 CAD 检查，下一轮建议继续扩展折边避让。
 - 当前 U 型件和 L 型件已初步支持带孔折弯模板，并已完成内部公共面定义逻辑抽象；更通用的公开多折弯件 `part_type` 仍需补齐，为箱体、电缆盒和复杂产品拆图打基础。
+- 当前孔到折弯校验已能区分折弯线、MVP 折弯影响区和所属面边界；下一步应把这些风险信息体现在 SVG 检查图和 DXF 文字中。
 - 当前项目已接入 GitHub 仓库 `rockyshi-glitch/Sheet_Metal_AI_Assistant`；后续应在每次任务完成后提交并推送，保持云端备份同步。
 - 电缆盒、箱体类产品应先从参数化模板切入，逐步表达多面结构、折弯关系、焊接边和装配关系，再进入自动拆件和评分。
 - 拆图优化应采用“候选方案生成 + 制造约束校验 + 可解释评分”的结构，不应让 AI 单独决定生产方案。

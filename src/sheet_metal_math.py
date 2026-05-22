@@ -175,9 +175,15 @@ class UBracketWithHolesParams(UBracketParams):
 
     def validate(self) -> None:
         super().validate()
+        bend_allowance = calculate_bend_allowance(
+            bend_angle=self.bend_angle,
+            inside_bend_radius=self.inside_bend_radius,
+            k_factor=self.k_factor,
+            thickness=self.thickness,
+        )
         _validate_bent_plate_face_holes(
             self.holes,
-            _u_bracket_face_definitions(self, bend_allowance=0.0),
+            _u_bracket_face_definitions(self, bend_allowance=bend_allowance),
             part_length=self.part_length,
             min_hole_to_bend_distance=self.min_hole_to_bend_distance,
         )
@@ -272,9 +278,15 @@ class LBracketWithHolesParams(LBracketParams):
 
     def validate(self) -> None:
         super().validate()
+        bend_allowance = calculate_bend_allowance(
+            bend_angle=self.bend_angle,
+            inside_bend_radius=self.inside_bend_radius,
+            k_factor=self.k_factor,
+            thickness=self.thickness,
+        )
         _validate_bent_plate_face_holes(
             self.holes,
-            _l_bracket_face_definitions(self, bend_allowance=0.0),
+            _l_bracket_face_definitions(self, bend_allowance=bend_allowance),
             part_length=self.part_length,
             min_hole_to_bend_distance=self.min_hole_to_bend_distance,
         )
@@ -403,16 +415,45 @@ def _validate_hole_inside_rectangle(
 class BentPlateFaceDefinition:
     width: float
     offset_x: float
-    bend_edge_sides: tuple[str, ...]
+    bend_line_x_by_side: dict[str, float]
 
 
-def _bend_edge_clearances(hole: Hole, *, face_width: float, bend_edge_sides: tuple[str, ...]) -> list[float]:
+@dataclass(frozen=True)
+class BendClearance:
+    side: str
+    face_edge_clearance: float
+    bend_line_clearance: float
+    bend_influence_clearance: float
+
+
+def _bend_clearances(
+    hole: Hole,
+    *,
+    face_width: float,
+    bend_line_x_by_side: dict[str, float],
+) -> list[BendClearance]:
     half_x, _ = _hole_half_extents(hole)
     clearances = []
-    if "left" in bend_edge_sides:
-        clearances.append(hole.x - half_x)
-    if "right" in bend_edge_sides:
-        clearances.append(face_width - (hole.x + half_x))
+    if "left" in bend_line_x_by_side:
+        face_edge_clearance = hole.x - half_x
+        clearances.append(
+            BendClearance(
+                side="left",
+                face_edge_clearance=face_edge_clearance,
+                bend_line_clearance=(hole.x - half_x) - bend_line_x_by_side["left"],
+                bend_influence_clearance=face_edge_clearance,
+            )
+        )
+    if "right" in bend_line_x_by_side:
+        face_edge_clearance = face_width - (hole.x + half_x)
+        clearances.append(
+            BendClearance(
+                side="right",
+                face_edge_clearance=face_edge_clearance,
+                bend_line_clearance=bend_line_x_by_side["right"] - (hole.x + half_x),
+                bend_influence_clearance=face_edge_clearance,
+            )
+        )
     return clearances
 
 
@@ -436,15 +477,18 @@ def _validate_bent_plate_face_holes(
         )
         if min_hole_to_bend_distance <= 0:
             continue
-        clearances = _bend_edge_clearances(
+        clearances = _bend_clearances(
             face_hole.hole,
             face_width=face_definition.width,
-            bend_edge_sides=face_definition.bend_edge_sides,
+            bend_line_x_by_side=face_definition.bend_line_x_by_side,
         )
-        if clearances and min(clearances) < min_hole_to_bend_distance:
+        risk = min(clearances, key=lambda clearance: clearance.bend_influence_clearance) if clearances else None
+        if risk and risk.bend_influence_clearance < min_hole_to_bend_distance:
             raise ValueError(
                 f"holes[{index}] must keep at least {min_hole_to_bend_distance:.2f} mm "
-                "from bend-adjacent face edges."
+                f"from the bend influence zone near the {risk.side} face edge "
+                f"(bend-line clearance: {risk.bend_line_clearance:.2f} mm, "
+                f"face-edge clearance: {risk.face_edge_clearance:.2f} mm)."
             )
 
 
@@ -997,17 +1041,20 @@ def _u_bracket_face_definitions(params, *, bend_allowance: float) -> dict[str, B
         "left_flange": BentPlateFaceDefinition(
             width=params.left_flange_height,
             offset_x=0.0,
-            bend_edge_sides=("right",),
+            bend_line_x_by_side={"right": params.left_flange_height + bend_allowance / 2.0},
         ),
         "bottom": BentPlateFaceDefinition(
             width=params.bottom_width,
             offset_x=params.left_flange_height + bend_allowance,
-            bend_edge_sides=("left", "right"),
+            bend_line_x_by_side={
+                "left": -bend_allowance / 2.0,
+                "right": params.bottom_width + bend_allowance / 2.0,
+            },
         ),
         "right_flange": BentPlateFaceDefinition(
             width=params.right_flange_height,
             offset_x=params.left_flange_height + bend_allowance + params.bottom_width + bend_allowance,
-            bend_edge_sides=("left",),
+            bend_line_x_by_side={"left": -bend_allowance / 2.0},
         ),
     }
 
@@ -1017,12 +1064,12 @@ def _l_bracket_face_definitions(params, *, bend_allowance: float) -> dict[str, B
         "flange": BentPlateFaceDefinition(
             width=params.flange_height,
             offset_x=0.0,
-            bend_edge_sides=("right",),
+            bend_line_x_by_side={"right": params.flange_height + bend_allowance / 2.0},
         ),
         "base": BentPlateFaceDefinition(
             width=params.base_width,
             offset_x=params.flange_height + bend_allowance,
-            bend_edge_sides=("left",),
+            bend_line_x_by_side={"left": -bend_allowance / 2.0},
         ),
     }
 
