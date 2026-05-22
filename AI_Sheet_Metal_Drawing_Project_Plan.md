@@ -815,6 +815,37 @@ DXF 可以在 AutoCAD 或 FreeCAD 等 CAD 软件中打开并继续编辑
 
 ## 当前进度
 
+### 2026-05-23 Streamlit 本地服务恢复更新
+
+已完成：
+
+- 已排查 `http://localhost:8506` 无法打开的问题。
+- 确认 `8506` 端口原本没有监听进程，Streamlit 服务未运行。
+- 首次启动时 Streamlit 试图写入用户目录 `~/.streamlit/credentials.toml`，在当前 Codex 沙箱内被权限拦截。
+- 已使用项目目录作为临时 `HOME` 并在沙箱外启动 Streamlit：
+  - `env HOME=/Users/rocky_shi/Desktop/Sheet_Metal_AI_Assistant STREAMLIT_BROWSER_GATHER_USAGE_STATS=false .venv/bin/streamlit run src/streamlit_app.py --server.port 8506`
+- 已确认 `8506` 端口正在监听。
+- 已通过 `curl -I http://localhost:8506` 确认 HTTP 返回 `200 OK`。
+- 已使用浏览器自动化读取页面内容，确认页面显示“钣金 DXF 参数生成”、参数输入、JSON 上传、生成 DXF、SVG 检查图和交付包等界面内容。
+- 已更新 `.gitignore`，排除本次运行产生的 `.cache/` 和 `.streamlit/` 本地状态目录。
+
+本次修改的文件：
+
+- `.gitignore`
+- `AI_Sheet_Metal_Drawing_Project_Plan.md`
+
+测试结果：
+
+- 已确认 Streamlit 服务在 `http://localhost:8506` 可访问。
+- 本次未修改业务代码，未重新运行完整单元测试。
+
+存在问题：
+
+- Streamlit 服务依赖本地进程持续运行；如果终端会话结束或进程被系统停止，页面仍会打不开，需要重新启动。
+- 当前本机没有安装 `watchdog`，Streamlit 仅提示性能优化建议，不影响页面访问。
+
+---
+
 ### 2026-05-22 孔到折弯线与折弯影响区校验更新
 
 已完成：

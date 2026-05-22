@@ -21,6 +21,8 @@ env/
 .env.*
 
 # Streamlit local state
+.cache/
+.streamlit/
 .streamlit/secrets.toml
 
 # Generated video preview caches
